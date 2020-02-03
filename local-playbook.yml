@@ -1,0 +1,22 @@
+- name: Deploy the application to the "local" server
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Create the application directory
+      file:
+        path: /usr/src/app
+        state: directory
+    - name: Copy  files over
+      copy:
+        src: .
+        dest: /usr/src/app
+    - name: Bring the application up
+      make:
+        chdir: /usr/src/app
+        target: run
+    - name: Install "secure-delete" package
+      apt:
+        name: secure-delete
+        state: present
+    - name: Secure deleting application files
+      command: srm -vzr /usr/src/app

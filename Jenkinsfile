@@ -4,7 +4,7 @@ node {
          checkout scm
     }
     stage('build') {
-      app = docker.build("flaskky:${env.BUILD_ID}", "docker/")
+      app = docker.build("flaskky:${env.BUILD_ID}")
     }
     stage('Publish') {
       docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {

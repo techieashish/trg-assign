@@ -1,0 +1,30 @@
+pipeline {
+  agent { docker { image 'python:3.7.2' } }
+  stages {
+    stage('build') {
+      steps{
+      sh 'docker build -t flasky:${env.BUILD_ID} .'
+      }
+    }
+    stage('test') {
+      steps {
+        sh 'python test.py'
+      }
+      post {
+        always {
+          junit 'test-reports/*.xml'
+        }
+      }
+    }
+    stage('Publish') {
+      when {
+        branch 'master'
+      }
+      steps {
+        withDockerRegistry([ credentialsId: "docker-hub-credentials", url: "" ]) {
+          sh 'docker push flasky:${env.BUILD_ID}'
+        }
+      }
+    }
+  }
+}
