@@ -1,4 +1,4 @@
-node {
+pipeline {
   agent { dockerfile true }
   def app
   stages {
@@ -26,5 +26,7 @@ node {
         docker.withRegistry([ 'https://registry.hub.docker.com', 'docker-hub-credentials']) {
             app.push("latest")
         }
+      }
+    }
   }
 }
