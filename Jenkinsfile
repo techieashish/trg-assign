@@ -11,4 +11,7 @@ node {
             app.push("latest")
       }
     }
+    stage('Deploy') {
+      sh 'ansible-playbook local-playbook.yml '
+    }
   }
