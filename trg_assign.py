@@ -1,7 +1,4 @@
 from flask import Flask
-"""
-Just for commit
-"""
 
 app = Flask(__name__)
 
