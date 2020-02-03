@@ -13,5 +13,4 @@ RUN pip install -r req.txt
 COPY . /usr/src/app
 
 EXPOSE 5000
-ENTRYPOINT ["python"]
-CMD ["trg_assign.py"]
+CMD ["python", "trg_assign.py"]
