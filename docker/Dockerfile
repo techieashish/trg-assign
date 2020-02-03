@@ -7,10 +7,9 @@ LABEL org.label-schema.build-date=$BUILD_DATE
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-COPY req.txt /usr/src/app/
+COPY app/ /usr/src/app
 RUN pip install -r req.txt
 
-COPY . /usr/src/app
 
 EXPOSE 5000
 CMD ["python", "trg_assign.py"]
