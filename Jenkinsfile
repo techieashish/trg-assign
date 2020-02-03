@@ -1,4 +1,4 @@
-pipeline {
+node {
   agent { docker { image 'python:3.7.2' } }
   def app
   stages {
