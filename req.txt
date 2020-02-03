@@ -1,2 +1,0 @@
-flask
-xmlrunner==1.7.7
