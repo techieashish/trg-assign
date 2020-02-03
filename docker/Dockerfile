@@ -5,9 +5,9 @@ ARG BUILD_DATE
 LABEL org.label-schema.build-date=$BUILD_DATE
 
 RUN mkdir -p /usr/src/app
+COPY ../app/ /usr/src/app
 WORKDIR /usr/src/app
 
-COPY ../app/ /usr/src/app
 RUN pip install -r req.txt
 
 
