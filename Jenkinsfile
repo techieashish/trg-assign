@@ -1,15 +1,12 @@
-pipeline {
+node {
   agent { dockerfile true }
-
-  stages {
+  def app
     stage('Checkout Repository') {
-      steps {
-        sh checkout scm
-      }
+         checkout scm
     }
     stage('build') {
       steps{
-        def app = docker.build("flaskky:${env.BUILD_ID}")
+      app = docker.build("flaskky:${env.BUILD_ID}")
       }
     }
     stage('test') {
@@ -33,4 +30,3 @@ pipeline {
       }
     }
   }
-}
