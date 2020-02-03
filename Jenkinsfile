@@ -4,14 +4,10 @@ node {
          checkout scm
     }
     stage('build') {
-      steps{
       app = docker.build("flaskky:${env.BUILD_ID}")
-      }
     }
     stage('test') {
-      steps {
-        app.inside{sh 'python test.py'}
-      }
+      app.inside{sh 'python test.py'}
       post {
         always {
           junit 'test-reports/*.xml'
@@ -22,10 +18,8 @@ node {
       when {
         branch 'master'
       }
-      steps {
-        docker.withRegistry([ 'https://registry.hub.docker.com', 'docker-hub-credentials']) {
+      docker.withRegistry([ 'https://registry.hub.docker.com', 'docker-hub-credentials']) {
             app.push("latest")
-        }
       }
     }
   }
