@@ -1,5 +1,4 @@
 node {
-  agent { dockerfile true }
   def app
     stage('Checkout Repository') {
          checkout scm
@@ -11,7 +10,7 @@ node {
     }
     stage('test') {
       steps {
-        sh 'python test.py'
+        app.inside{sh 'python test.py'}
       }
       post {
         always {
